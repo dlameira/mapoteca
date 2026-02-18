@@ -23,20 +23,24 @@ model User {
 }
 
 model Work {
-  id           String      @id @default(cuid())
-  title        String
-  description  String?
-  type         WorkType
-  fileUrl      String?
-  content      String?
-  tags         String[]
-  published    Boolean     @default(true)
-  author       User        @relation(fields: [authorId], references: [id])
-  authorId     String
-  collection   Collection? @relation(fields: [collectionId], references: [id])
-  collectionId String?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id               String      @id @default(cuid())
+  title            String
+  description      String?
+  type             WorkType
+  fileUrl          String?
+  content          String?
+  tags             String[]
+  published        Boolean     @default(true)
+  hidden           Boolean     @default(false)    // ← novo
+  featuredOrder    Int?                            // ← novo
+  featuredPosition String?     @default("50% 50%")
+  featuredScale    Float?      @default(1.0)
+  author           User        @relation(fields: [authorId], references: [id])
+  authorId         String
+  collection       Collection? @relation(fields: [collectionId], references: [id])
+  collectionId     String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 }
 
 model Collection {
